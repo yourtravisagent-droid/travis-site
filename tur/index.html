@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Travis — Hayatınızın sessiz operasyonları. Halledildi.</title>
+<meta name="description" content="Travis, kişisel yapay zekâ şef operatörünüz — market siparişleri, fitness rezervasyonları, işlem incelemesi, aile lojistiği, seyahat ve daha fazlasını yürüten bir ajan filosu. Kendi Mac'inizde çalışır. Telegram öncelikli.">
+<meta property="og:title" content="Travis — Hayatınızın sessiz operasyonları. Halledildi.">
+<meta property="og:description" content="Hayatınızın sessiz operasyonlarını yürüten bir ajan filosu. Market, rezervasyon, brifing, para. Telegram öncelikli.">
+<link rel="stylesheet" href="/style.css">
+<style>
+  /* Hero override for landing */
+  .hero-intro {
+    font-size: 15px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .hero-name {
+    font-size: 92px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+    margin: 0 0 28px;
+    color: #80e5c3;
+  }
+  .hero-tag {
+    font-size: 40px;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    margin: 0 0 18px;
+    color: var(--ink);
+    max-width: 780px;
+  }
+  .hero-tag .period { color: #80e5c3; }
+  .hero-sub-copy {
+    color: var(--ink-dim);
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 620px;
+    margin: 0 0 18px;
+  }
+  @media (max-width: 720px) {
+    .hero-name { font-size: 64px; }
+    .hero-tag { font-size: 28px; }
+    .hero-sub-copy { font-size: 16px; }
+  }
+
+  /* Category section headings */
+  .cat-head {
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    font-weight: 600;
+    margin: 44px 0 14px;
+    padding-left: 4px;
+  }
+  .cat-head:first-of-type { margin-top: 0; }
+
+  /* Waitlist form */
+  .waitlist {
+    background:
+      radial-gradient(400px 160px at 50% -20px, rgba(128, 229, 195, 0.14), transparent 70%),
+      var(--bg-2);
+    border: 1px solid var(--rule);
+    border-radius: 18px;
+    padding: 36px 32px;
+    margin-top: 56px;
+    text-align: center;
+  }
+  .waitlist h3 {
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #80e5c3;
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+  .waitlist h2 {
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+  }
+  .waitlist p {
+    color: var(--ink-dim);
+    margin: 0 0 22px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .waitlist form {
+    display: flex;
+    gap: 8px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .waitlist input[type="email"] {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 14px 16px;
+    color: var(--ink);
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+  .waitlist input[type="email"]:focus {
+    border-color: rgba(128, 229, 195, 0.5);
+  }
+  .waitlist button {
+    background: #80e5c3;
+    color: #0a0a0f;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  .waitlist button:hover:not(:disabled) { opacity: 0.9; }
+  .waitlist button:disabled { opacity: 0.5; cursor: progress; }
+  .waitlist-status {
+    min-height: 22px;
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--ink-dim);
+  }
+  .waitlist-status.success { color: #80e5c3; }
+  .waitlist-status.error { color: #ff7a8b; }
+  @media (max-width: 520px) {
+    .waitlist form { flex-direction: column; }
+    .waitlist button { padding: 14px 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="site-wrap">
+
+<nav class="site-nav">
+  <div class="brand">Travis<span class="dot">.</span></div>
+  <div class="nav-links">
+    <a href="#features">Özellikler</a>
+    <a href="#philosophy">Felsefe</a>
+    <a href="#waitlist">Bekleme listesi</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-intro">Tanıtım</div>
+  <h1 class="hero-name">Travis.</h1>
+  <div class="hero-tag">
+    Hayatınızın sessiz operasyonları<span class="period">.</span><br>
+    Halledildi<span class="period">.</span>
+  </div>
+  <p class="hero-sub-copy">
+    Kişisel yapay zekâ şef operatörünüz — kendi Mac'inizde çalışan bir
+    uzman ajan filosu. Takviminizi izlerler, gelen kutunuzu okurlar,
+    alışkanlıklarınızı bilirler; ev, fitness, finans ve seyahat
+    mekanizmasını işler halde tutarlar. Bir karar gerektiğinde tek bir
+    Telegram dokunuşu alırsınız. Geri kalan her şeyi kendileri yapar.
+  </p>
+  <p class="sub">Telegram öncelikli · macOS yerli · ajan tabanlı · varsayılan olarak özel</p>
+</header>
+
+<section class="section" id="features">
+
+<div class="cat-head">Temel — her zaman açık</div>
+<div class="grid">
+
+  <a class="card" data-accent="blue" href="/tur/features/morning-briefing.html">
+    <div class="card-icon">🌅</div>
+    <div class="card-label">Sabah Brifingi</div>
+    <div class="card-title">Gününüz. Hazır.</div>
+    <div class="card-desc">Takvim, hava durumu, sona eren kredi avantajları, seans öncesi piyasa. Kahveden önce tek bir e-posta.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+  <a class="card" data-accent="lav" href="/tur/features/evening-briefing.html">
+    <div class="card-icon">🌙</div>
+    <div class="card-label">Akşam Brifingi</div>
+    <div class="card-title">Günün yayı. Kapandı.</div>
+    <div class="card-desc">Bugün kapanan, yarına hazırlanacak, sakin bir dille günün kapanışı.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+  <a class="card" data-accent="green" href="/tur/features/inbox-scanner.html">
+    <div class="card-icon">📬</div>
+    <div class="card-label">Gelen Kutusu Tarayıcı</div>
+    <div class="card-title">E-posta. Yönlendirildi.</div>
+    <div class="card-desc">Makbuzlar → geçmiş. Onaylar → takvim. Gürültü elendi, sinyal korundu.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+</div>
+
+<div class="cat-head">Ev</div>
+<div class="grid">
+
+  <a class="card" data-accent="green" href="/tur/features/auto-grocery.html">
+    <div class="card-icon">🛒</div>
+    <div class="card-label">Otomatik Market</div>
+    <div class="card-title">Haftalık market. Otomatik pilotta.</div>
+    <div class="card-desc">Sipariş geçmişinizi izler, üç farklı marketteki sepeti doldurur, tek dokunuş ister.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+  <a class="card" data-accent="pink" href="/tur/features/family-note.html">
+    <div class="card-icon">📝</div>
+    <div class="card-label">Aile Şef Operatörü</div>
+    <div class="card-title">Tek not. Çok el.</div>
+    <div class="card-desc">Paylaşılan bir not, evin gelen kutusudur. Travis okur, tarihleri öne çıkarır, döngüleri kapatır.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+  <a class="card" data-accent="teal" href="/tur/features/calendar-auto.html">
+    <div class="card-icon">📅</div>
+    <div class="card-label">Takvime Otomatik Ekleme</div>
+    <div class="card-title">Yönlendirin. gcal'da görün.</div>
+    <div class="card-desc">Davetler, RSVP'ler, etkinlikler — doğru katılımcılar ve hatırlatmalarla takvime yönlendirilir.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+  <a class="card" data-accent="lav" href="/tur/features/kid-daily.html">
+    <div class="card-icon">🎒</div>
+    <div class="card-label">Çocuk Günlüğü</div>
+    <div class="card-title">Okul raporları. Özetlendi.</div>
+    <div class="card-desc">Gün sonu sınıf raporları, 60 saniyelik bir aile özetine dönüşür.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+  <a class="card" data-accent="pink" href="/tur/features/household-routines.html">
+    <div class="card-icon">🧹</div>
+    <div class="card-label">Ev Rutinleri</div>
+    <div class="card-title">Ev işleri. Evcil hayvanlar. Abonelikler.</div>
+    <div class="card-desc">Görünmez ama zorunlu olan şeyler — temizlikçi günleri, evcil hayvan ilaçları, yenilemeler — hep düzen içinde.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+</div>
+
+<div class="cat-head">Sağlık + Fitness</div>
+<div class="grid">
+
+  <a class="card" data-accent="orange" href="/tur/features/theory.html">
+    <div class="card-icon">💪</div>
+    <div class="card-label">Theory</div>
+    <div class="card-title">OTF yeri. Zaten ayırıldı.</div>
+    <div class="card-desc">28 günlük rezervasyon penceresi açılır açılmaz tercih ettiğiniz dersi kapar. Bekleme listesi farkındalığıyla.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+  <a class="card" data-accent="red" href="/tur/features/hevy.html">
+    <div class="card-icon">🏋️</div>
+    <div class="card-label">Hevy İnceleme</div>
+    <div class="card-title">Gelişiyorsunuz. Doğrulandı.</div>
+    <div class="card-desc">Aynı slotun geçen döngüsüne karşı haftalık farklar. Gereksiz alarm olmadan gerilemeleri işaretler.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+  <a class="card" data-accent="amber" href="/tur/features/cycle.html">
+    <div class="card-icon">🚲</div>
+    <div class="card-label">Cycle</div>
+    <div class="card-title">Bisikletiniz. Zaten sizin.</div>
+    <div class="card-desc">SoulCycle'ın ders başına açılan rezervasyon penceresi tek tek izlenir. Eğitmen tercihleri sıralanır, bekleme listeleri yönetilir, iptal pencereleri gözetilir.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+  <a class="card" data-accent="pink" href="/tur/features/wellness.html">
+    <div class="card-icon">🩺</div>
+    <div class="card-label">Sağlık Konsiyerji</div>
+    <div class="card-title">Randevular. Hattı kurulu.</div>
+    <div class="card-desc">Operasyon öncesi hazırlık, gün hatırlatmaları, operasyon sonrası bakım, tekrarlayan diş hekimi takvimi. Çatlaklardan sıfır sızıntı.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+</div>
+
+<div class="cat-head">Para</div>
+<div class="grid">
+
+  <a class="card" data-accent="gold" href="/tur/features/wealth-dashboard.html">
+    <div class="card-icon">📊</div>
+    <div class="card-label">Servet Paneli</div>
+    <div class="card-title">Portföy. Her zaman güncel.</div>
+    <div class="card-desc">Pozisyonlar canlı fiyatlara göre işaretlenir. Hedef yolu çizilir. Yıl içi realize kazanç + vergi etkisi ayrıca gösterilir.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+  <a class="card" data-accent="gold" href="/tur/features/warren.html">
+    <div class="card-icon">🏛️</div>
+    <div class="card-label">Warren</div>
+    <div class="card-title">İşlem öncesi komite incelemesi</div>
+    <div class="card-desc">Yedi uzman her spekülatif işlemi tartışır. Boğa görüşü vs. şüpheci, uygun pozisyon boyutu.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+  <a class="card" data-accent="gold" href="/tur/features/market-monitor.html">
+    <div class="card-icon">📡</div>
+    <div class="card-label">Piyasa İzleyici</div>
+    <div class="card-title">Tez koşulları. İzleniyor.</div>
+    <div class="card-desc">Prim değil, spot bazlı stoplar. Gerçek zamanlı uyarılar. İçeriden alımlar + olağan dışı akışlar gün yüzüne çıkar.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+  <a class="card" data-accent="gold" href="/tur/features/cc-benefits.html">
+    <div class="card-icon">💳</div>
+    <div class="card-label">Kart Avantajı Takibi</div>
+    <div class="card-title">Kullan ya da kaybet. Öne çıkarıldı.</div>
+    <div class="card-desc">Havayolu, otel, restoran kredileri için kademeli hatırlatmalar. Yıllık ücretler kendini amorti eder.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+</div>
+
+<div class="cat-head">Seyahat</div>
+<div class="grid">
+
+  <a class="card" data-accent="blue" href="/tur/features/awardwallet.html">
+    <div class="card-icon">✈️</div>
+    <div class="card-label">AwardWallet Senkronizasyonu</div>
+    <div class="card-title">Her puan. Tek görünüm.</div>
+    <div class="card-desc">Tüm programlar, tüm aile üyeleri için günlük çekim. Transfer yolu matematiğini besler.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+  <a class="card" data-accent="teal" href="/tur/features/travel-toolkit.html">
+    <div class="card-icon">🧭</div>
+    <div class="card-label">Seyahat Araç Seti</div>
+    <div class="card-title">Ödül uçuşları. Elektronik tablo olmadan.</div>
+    <div class="card-desc">Seats.aero + transfer grafiği + CPP matematiği + otel programı tetikleyicileri. Tek soru, sıralı seçenekler.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+  <a class="card" data-accent="teal" href="/tur/features/trip-pings.html">
+    <div class="card-icon">🗓️</div>
+    <div class="card-label">Seyahat Hatırlatmaları</div>
+    <div class="card-title">Yüzlerce küçük şey</div>
+    <div class="card-desc">Rezervasyon açılışları, bavul listeleri, uçuş değişiklikleri, konsiyerj mesaj taslakları — tam gününde.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+</div>
+
+<div class="cat-head">Güvenlik</div>
+<div class="grid">
+
+  <a class="card" data-accent="red" href="/tur/features/security.html">
+    <div class="card-icon">🛡️</div>
+    <div class="card-label">Güvenlik Sağlamlaştırma</div>
+    <div class="card-title">Prompt enjeksiyonu savunmaları</div>
+    <div class="card-desc">Dış gönderim izin listesi, kanarya tetikleyiciler, acil durdurma, aylık red-team, Bash kumu.</div>
+    <div class="card-cta">Detay →</div>
+  </a>
+
+</div>
+
+</section>
+
+<section class="section waitlist" id="waitlist">
+  <h3>Bekleme listesine katılın</h3>
+  <h2>Travis partiler halinde kullanıma açılıyor.</h2>
+  <p>E-postanızı bırakın. Sıra size geldiğinde haber veririz. Bülten yok, güncelleme yok, gürültü yok — hazır olduğunda tek bir mesaj.</p>
+  <form id="waitlist-form" novalidate>
+    <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+    <button type="submit">Davet iste</button>
+  </form>
+  <div class="waitlist-status" id="waitlist-status"></div>
+</section>
+
+<section class="section" id="philosophy">
+  <h2>Felsefe</h2>
+  <div class="manifesto">
+    <h3>Varsayılan olarak sessiz</h3>
+    <p>Çoğu asistan sizi yaptığı işlerle etkilemeye çalışır. Travis bunun tam tersidir. Arka planda çalışır, işi yapar ve yalnızca devretmediğiniz bir karar gerçekten dikkatinizi gerektirdiğinde sizi rahatsız eder.</p>
+    <p>Size Telegram mesajı göndermenin eşiği yüksektir. Satın alma yapmanın eşiği gerçek bir dokunuştur. Evinizin dışına ulaşmanın eşiği daha da yüksektir. Varsayılanlar "doğru şeyi sessizce yap"a eğilimlidir, ancak geri dönüşü olmayan her eylem açık onaydan geçer.</p>
+  </div>
+  <div class="manifesto">
+    <h3>Kendi Mac'inizde çalışır</h3>
+    <p>Bulut hesabı yok, Travis-the-SaaS yok, veri paylaşım katmanı yok. Zaten sahip olduğunuz bir Mac, zaten kontrol ettiğiniz bir repo, kendi Keychain'inizdeki sırlar. Ajanlar sitelerle ve API'lerle sizin oturumlarınız üzerinden konuşur — sizin yapacağınız şeyleri, sadece daha hızlı ve daha sabırlı yaparlar.</p>
+    <p>Mimari olarak tasarım gereği sıkıcı. Zamanlama için launchd, API'si olmayan siteler için Playwright, girdi için Telegram, muhakeme çağrıları için Claude.</p>
+  </div>
+  <div class="manifesto">
+    <h3>Arayüz tek bir dokunuş</h3>
+    <p>Travis bir uygulama değildir. Giriş yaptığınız bir panel yoktur. Ayıklayacağınız bildirimler yoktur. Arayüz bir Telegram sohbetidir — tek bir konu, üç tür mesaj: brifing, karar istemi, onay. Onaylayın ya da reddedin, o yola devam eder.</p>
+  </div>
+</section>
+
+<div class="footer">
+  Travis — kişisel yapay zekâ şef operatörünüz.
+  <br>Kendi Mac'inizi, kendi sırlarınızı, kendi hayatınızı getirin.
+</div>
+
+</div>
+
+<script>
+(function() {
+  var form = document.getElementById("waitlist-form");
+  var status = document.getElementById("waitlist-status");
+  if (!form) return;
+  form.addEventListener("submit", async function(ev) {
+    ev.preventDefault();
+    var email = (form.elements.email.value || "").trim();
+    if (!email) return;
+    var btn = form.querySelector("button");
+    btn.disabled = true;
+    status.className = "waitlist-status";
+    status.textContent = "Gönderiliyor…";
+    try {
+      var r = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email })
+      });
+      var data = await r.json().catch(function(){ return {}; });
+      if (r.ok && data.ok) {
+        status.className = "waitlist-status success";
+        status.textContent = "Listedesiniz. Travis size ulaşacak.";
+        form.elements.email.value = "";
+      } else {
+        status.className = "waitlist-status error";
+        status.textContent = "Bir şeyler ters gitti. Tekrar dener misiniz?";
+      }
+    } catch (e) {
+      status.className = "waitlist-status error";
+      status.textContent = "Ağ hatası. Tekrar dener misiniz?";
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

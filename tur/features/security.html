@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="tr"><head>
+<meta charset="utf-8"><title>Güvenlik Sağlamlaştırma — Travis</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="/style.css">
+</head><body class="a-red">
+<div class="fw">
+
+<a class="back-link" href="/tur">← Tüm özellikler</a>
+<div class="eyebrow">Özellik</div>
+<h1>Travis <span class="hl">Güvenlik Sağlamlaştırma</span></h1>
+<p class="lede">
+  E-postanızı okuyan, takviminize dokunan, finansal verilerinizi bilen ve
+  satın alma yapabilen bir ajanın <b>gerçek korkulukları</b> olmalıdır.
+  "Bana güven" değil. Prompt enjeksiyonuna, veri sızıntısına ve kimlik
+  sahteciliğine karşı gerçek, yapısal savunmalar. Varsayılan olarak
+  katmanlandırılmış.
+</p>
+
+<div class="flow">
+
+  <div class="step">
+    <div class="icon">🧾</div>
+    <div>
+      <div class="label">Davranış kuralları</div>
+      <div class="title">Dış gönderim izin listesi</div>
+      <div class="sub">Travis'in prompt'una sabit kodlanmış: .env, Keychain öğeleri, hassas veri JSON'ları, bellek dizini, kişisel kimlik bilgileri <em>asla</em> iletilmez. İzin verilen hedefler yalnızca kendi hesaplarınızdır.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="icon">🪤</div>
+    <div>
+      <div class="label">Kanarya tetikleyiciler</div>
+      <div class="title">Hassas verilere ekilmiş</div>
+      <div class="sub">Finansal + sadakat veri dosyalarına ekilmiş rastgele <code>CANARY-…</code> dizileri. Bir kanarya giden bir mesajda görünürse, bir prompt enjeksiyonu başarılı olmuştur — ve aylık red-team bunu yakalar.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="icon">🛑</div>
+    <div>
+      <div class="label">Bash kumu</div>
+      <div class="title">Yapısal dış gönderim engelleri</div>
+      <div class="sub">Claude Code ayarlar dosyası, dış gönderim biçimindeki kabuk çağrılarını engelleyen bir reddetme listesi taşır: gizli dosyaların curl'a cat'lenmesi, Keychain'den mail'e, bellek dizininden ağa, POST içinde kanarya. <em>Davranış katmanı kayıp düşse bile araç katmanı reddeder.</em></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="icon">🚨</div>
+    <div>
+      <div class="label">Acil durdurma + red-team</div>
+      <div class="title">Bilinen kurtarma, kanıtlanmış dayanıklılık</div>
+      <div class="sub">DM'nizden <code>/halt</code> her Travis işini durdurur ve uçuştaki tarayıcıları öldürür. Aylık red-team kanonik enjeksiyon e-postalarını otomatik gönderir, sonra giden logları tarar. <em>Geçsek de geçmesek de sonucu öğrenirsiniz.</em></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="tap">
+  <div class="tap-head">Sizin rolünüz</div>
+  <div class="tap-body">Güvenin, ama doğrulayın. Doğrulama döngüsünü Travis kendisi çalıştırır.</div>
+</div>
+
+<div class="page-footer">Standart kurulumla yüklenir; devre dışı bırakmak isteğe bağlıdır.</div>
+
+</div></body></html>
