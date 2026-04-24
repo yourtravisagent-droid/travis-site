@@ -20,6 +20,7 @@ body.a-pink    { --accent: #ff8fc1; --accent-soft: #ffb5d8; }
 body.a-teal    { --accent: #66d9d9; --accent-soft: #98e7e7; }
 body.a-lav     { --accent: #a89dff; --accent-soft: #c5beff; }
 body.a-red     { --accent: #ff7a8b; --accent-soft: #ff9fac; }
+body.a-amber   { --accent: #fbbf47; --accent-soft: #fcd278; }
 
 * { box-sizing: border-box; }
 html { -webkit-font-smoothing: antialiased; }
@@ -148,6 +149,7 @@ code { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 0.88em; }
 .card[data-accent="teal"]   { --accent: #66d9d9; }
 .card[data-accent="lav"]    { --accent: #a89dff; }
 .card[data-accent="red"]    { --accent: #ff7a8b; }
+.card[data-accent="amber"]  { --accent: #fbbf47; }
 .card[data-accent="green"]  .card-label { color: #80e5c3; }
 .card[data-accent="orange"] .card-label { color: #ff8f4d; }
 .card[data-accent="gold"]   .card-label { color: #d9a76c; }
@@ -156,6 +158,7 @@ code { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 0.88em; }
 .card[data-accent="teal"]   .card-label { color: #66d9d9; }
 .card[data-accent="lav"]    .card-label { color: #a89dff; }
 .card[data-accent="red"]    .card-label { color: #ff7a8b; }
+.card[data-accent="amber"]  .card-label { color: #fbbf47; }
 
 @media (max-width: 900px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
@@ -295,6 +298,28 @@ code { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 0.88em; }
   padding-top: 20px;
   border-top: 1px solid var(--rule);
 }
+
+/* Fine print / disclaimer block — used on investment + medical + money features. */
+.disclaimer {
+  margin-top: 28px;
+  padding: 16px 18px;
+  border-left: 2px solid var(--rule-2);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+  color: var(--ink-dim);
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+.disclaimer-head {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--ink-mid);
+  margin-bottom: 6px;
+}
+.disclaimer p { margin: 0 0 8px; }
+.disclaimer p:last-child { margin-bottom: 0; }
 
 @media (max-width: 380px) {
   .fw h1 { font-size: 34px; }
