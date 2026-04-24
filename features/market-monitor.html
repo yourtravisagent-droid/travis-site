@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><title>Market Monitor — Travis</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="/style.css">
+</head><body class="a-gold">
+<div class="fw">
+
+<a class="back-link" href="/">← All features</a>
+<div class="eyebrow">Feature</div>
+<h1>Travis <span class="hl">Market Monitor</span></h1>
+<p class="lede">
+  Once a position is on, the <b>thesis has stop conditions</b>. Market
+  Monitor watches the underlying, not the option premium — alerts when
+  the spot, the time decay, or a scheduled catalyst says the thesis
+  changed. Premarket + real-time + end-of-day digests.
+</p>
+
+<div class="flow">
+
+  <div class="step">
+    <div class="icon">👁️</div>
+    <div>
+      <div class="label">Watches</div>
+      <div class="title">Spot, not premium</div>
+      <div class="sub">Per-position triggers anchored to the underlying price + time/event, not option mid. Spreads, IV crush, bid-ask noise don't generate false alarms. <em>The underlying is the clean signal.</em></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="icon">⚡</div>
+    <div>
+      <div class="label">Alerts</div>
+      <div class="title">Real-time, only when it matters</div>
+      <div class="sub">Throttled to market hours plus a configurable vega window before each close. One Telegram ping per meaningful breach — not a stream of tick updates.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="icon">🌅</div>
+    <div>
+      <div class="label">Premarket + EOD</div>
+      <div class="title">Digests on your schedule</div>
+      <div class="sub">Morning: overnight gap, futures snapshot, catalysts on today's docket. Evening: close vs. entry, IV shift, any watchlist names that moved into/out of trigger zones.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="icon">📡</div>
+    <div>
+      <div class="label">Signal harvest</div>
+      <div class="title">Insider buys + unusual flow</div>
+      <div class="sub">SEC Form 4 filings matched against your watchlist — unexpected insider buys surface fast. Unusual options activity from public feeds, de-noised and cross-referenced.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="tap">
+  <div class="tap-head">Your part</div>
+  <div class="tap-body">Set the thesis. Let the agent watch it for you.</div>
+</div>
+
+<div class="page-footer">Real-time monitoring runs during market hours only.</div>
+
+</div></body></html>

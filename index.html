@@ -2,12 +2,144 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Travis — Your personal chief of staff</title>
+<title>Travis — The quiet operations of your life, handled.</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Travis is a personal AI chief of staff — a fleet of agents that handle groceries, fitness bookings, trade review, family logistics, travel, and more. Runs on your own Mac. Telegram-first.">
-<meta property="og:title" content="Travis — Your personal chief of staff">
+<meta property="og:title" content="Travis — The quiet operations of your life, handled.">
 <meta property="og:description" content="A fleet of agents that handle the quiet operations of your life. Groceries, bookings, briefings, money. Telegram-first.">
 <link rel="stylesheet" href="/style.css">
+<style>
+  /* Hero override for landing */
+  .hero-intro {
+    font-size: 15px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .hero-name {
+    font-size: 92px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+    margin: 0 0 28px;
+    color: #80e5c3;
+  }
+  .hero-tag {
+    font-size: 40px;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    margin: 0 0 18px;
+    color: var(--ink);
+    max-width: 780px;
+  }
+  .hero-tag .period { color: #80e5c3; }
+  .hero-sub-copy {
+    color: var(--ink-dim);
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 620px;
+    margin: 0 0 18px;
+  }
+  @media (max-width: 720px) {
+    .hero-name { font-size: 64px; }
+    .hero-tag { font-size: 28px; }
+    .hero-sub-copy { font-size: 16px; }
+  }
+
+  /* Category section headings */
+  .cat-head {
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    font-weight: 600;
+    margin: 44px 0 14px;
+    padding-left: 4px;
+  }
+  .cat-head:first-of-type { margin-top: 0; }
+
+  /* Waitlist form */
+  .waitlist {
+    background:
+      radial-gradient(400px 160px at 50% -20px, rgba(128, 229, 195, 0.14), transparent 70%),
+      var(--bg-2);
+    border: 1px solid var(--rule);
+    border-radius: 18px;
+    padding: 36px 32px;
+    margin-top: 56px;
+    text-align: center;
+  }
+  .waitlist h3 {
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #80e5c3;
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+  .waitlist h2 {
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+  }
+  .waitlist p {
+    color: var(--ink-dim);
+    margin: 0 0 22px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .waitlist form {
+    display: flex;
+    gap: 8px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .waitlist input[type="email"] {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 14px 16px;
+    color: var(--ink);
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+  .waitlist input[type="email"]:focus {
+    border-color: rgba(128, 229, 195, 0.5);
+  }
+  .waitlist button {
+    background: #80e5c3;
+    color: #0a0a0f;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  .waitlist button:hover:not(:disabled) { opacity: 0.9; }
+  .waitlist button:disabled { opacity: 0.5; cursor: progress; }
+  .waitlist-status {
+    min-height: 22px;
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--ink-dim);
+  }
+  .waitlist-status.success { color: #80e5c3; }
+  .waitlist-status.error { color: #ff7a8b; }
+  @media (max-width: 520px) {
+    .waitlist form { flex-direction: column; }
+    .waitlist button { padding: 14px 22px; }
+  }
+</style>
 </head>
 <body>
 <div class="site-wrap">
@@ -17,162 +149,239 @@
   <div class="nav-links">
     <a href="#features">Features</a>
     <a href="#philosophy">Philosophy</a>
+    <a href="#waitlist">Waitlist</a>
   </div>
 </nav>
 
 <header class="hero">
-  <h1>The <span class="hl">quiet operations</span><br>of your life,<br>handled.</h1>
-  <p class="lede">
-    Travis is a personal AI chief of staff — a fleet of specialist agents
-    running on your own Mac. They watch your calendar, read your inbox,
-    know your patterns, and keep the household, fitness, finance, and
-    travel machinery running. You get one Telegram tap when a decision
-    is required. Everything else, they just do.
+  <div class="hero-intro">Introducing</div>
+  <h1 class="hero-name">Travis.</h1>
+  <div class="hero-tag">
+    The quiet operations of your life<span class="period">.</span><br>
+    Handled<span class="period">.</span>
+  </div>
+  <p class="hero-sub-copy">
+    A personal AI chief of staff — a fleet of specialist agents running
+    on your own Mac. They watch your calendar, read your inbox, know
+    your patterns, and keep the household, fitness, finance, and travel
+    machinery running. You get one Telegram tap when a decision is
+    required. Everything else, they just do.
   </p>
   <p class="sub">Telegram-first · macOS-native · agentic · private by default</p>
 </header>
 
 <section class="section" id="features">
-  <h2>Agents</h2>
-  <div class="grid">
 
-    <a class="card" data-accent="green" href="/features/auto-grocery.html">
-      <div class="card-icon">🛒</div>
-      <div class="card-label">Auto-Grocery</div>
-      <div class="card-title">Weekly groceries on autopilot</div>
-      <div class="card-desc">Watches your order history, infers replenishment cycles, fills three carts across Costco / Whole Foods / Sprouts, asks for one tap.</div>
-      <div class="card-cta">Read →</div>
-    </a>
+<div class="cat-head">Core — always on</div>
+<div class="grid">
 
-    <a class="card" data-accent="orange" href="/features/theory.html">
-      <div class="card-icon">💪</div>
-      <div class="card-label">Theory</div>
-      <div class="card-title">Your Orangetheory seat, already booked</div>
-      <div class="card-desc">Grabs your preferred class the second the 28-day window opens. Handles waitlists, respects recovery weeks.</div>
-      <div class="card-cta">Read →</div>
-    </a>
+  <a class="card" data-accent="blue" href="/features/morning-briefing.html">
+    <div class="card-icon">🌅</div>
+    <div class="card-label">Morning Briefing</div>
+    <div class="card-title">Your day, prepared</div>
+    <div class="card-desc">Calendar, weather, expiring credits, premarket. One email before coffee.</div>
+    <div class="card-cta">Read →</div>
+  </a>
 
-    <a class="card" data-accent="gold" href="/features/warren.html">
-      <div class="card-icon">🏛️</div>
-      <div class="card-label">Warren</div>
-      <div class="card-title">Pre-trade committee review</div>
-      <div class="card-desc">Seven specialist agents pressure-test every speculative trade. Bull case vs. skeptic, weighted verdict, risk-sized position.</div>
-      <div class="card-cta">Read →</div>
-    </a>
+  <a class="card" data-accent="lav" href="/features/evening-briefing.html">
+    <div class="card-icon">🌙</div>
+    <div class="card-label">Evening Briefing</div>
+    <div class="card-title">Day's arc, closed</div>
+    <div class="card-desc">What shipped, what to prep for tomorrow, soft tone for the wind-down.</div>
+    <div class="card-cta">Read →</div>
+  </a>
 
-    <a class="card" data-accent="blue" href="/features/morning-briefing.html">
-      <div class="card-icon">🌅</div>
-      <div class="card-label">Morning Briefing</div>
-      <div class="card-title">Your day, prepared</div>
-      <div class="card-desc">Calendar, school events, weather, expiring credits, trading pre-market. A single email before you've had coffee.</div>
-      <div class="card-cta">Read →</div>
-    </a>
+  <a class="card" data-accent="green" href="/features/inbox-scanner.html">
+    <div class="card-icon">📬</div>
+    <div class="card-label">Inbox Scanner</div>
+    <div class="card-title">Email, routed</div>
+    <div class="card-desc">Receipts → history. Confirmations → calendar. Noise filtered, signal kept.</div>
+    <div class="card-cta">Read →</div>
+  </a>
 
-    <a class="card" data-accent="pink" href="/features/family-note.html">
-      <div class="card-icon">📝</div>
-      <div class="card-label">Family Chief of Staff</div>
-      <div class="card-title">One note, many hands</div>
-      <div class="card-desc">An Apple Note is the shared inbox for the household. Travis reads it each morning, surfaces deadlines, routes grocery adds, closes loops automatically.</div>
-      <div class="card-cta">Read →</div>
-    </a>
+</div>
 
-    <a class="card" data-accent="teal" href="/features/calendar-auto.html">
-      <div class="card-icon">📅</div>
-      <div class="card-label">Calendar Auto-Add</div>
-      <div class="card-title">Forward an invite, see it in gcal</div>
-      <div class="card-desc">Birthday parties, school events, RSVPs — forward the email or drop it in the note, Travis adds it to the calendar with the right guests.</div>
-      <div class="card-cta">Read →</div>
-    </a>
+<div class="cat-head">Household</div>
+<div class="grid">
 
-    <a class="card" data-accent="lav" href="/features/kid-daily.html">
-      <div class="card-icon">🎒</div>
-      <div class="card-label">Kid Daily</div>
-      <div class="card-title">School reports, summarized</div>
-      <div class="card-desc">End-of-day classroom report forwards into a 60-second summary — what they ate, how they napped, who they played with.</div>
-      <div class="card-cta">Read →</div>
-    </a>
+  <a class="card" data-accent="green" href="/features/auto-grocery.html">
+    <div class="card-icon">🛒</div>
+    <div class="card-label">Auto-Grocery</div>
+    <div class="card-title">Weekly groceries on autopilot</div>
+    <div class="card-desc">Watches your order history, fills three carts across your grocery stores, asks for one tap.</div>
+    <div class="card-cta">Read →</div>
+  </a>
 
-    <a class="card" data-accent="green" href="/features/inbox-scanner.html">
-      <div class="card-icon">📬</div>
-      <div class="card-label">Inbox Scanner</div>
-      <div class="card-title">Email, digested in minutes</div>
-      <div class="card-desc">Receipts land in order history. Flight changes bump your itinerary. Bills get flagged. Newsletters get rolled up. Noise filtered, signal kept.</div>
-      <div class="card-cta">Read →</div>
-    </a>
+  <a class="card" data-accent="pink" href="/features/family-note.html">
+    <div class="card-icon">📝</div>
+    <div class="card-label">Family Chief of Staff</div>
+    <div class="card-title">One note, many hands</div>
+    <div class="card-desc">A shared note is the household inbox. Travis reads it, surfaces deadlines, closes loops.</div>
+    <div class="card-cta">Read →</div>
+  </a>
 
-    <a class="card" data-accent="gold" href="/features/cc-benefits.html">
-      <div class="card-icon">💳</div>
-      <div class="card-label">CC Benefits Tracker</div>
-      <div class="card-title">Use-it-or-lose-it, surfaced</div>
-      <div class="card-desc">Tiered nudges for airline credits, hotel credits, streaming stipends, annual fee quirks. Tracks what you've burned, flags what's about to expire.</div>
-      <div class="card-cta">Read →</div>
-    </a>
+  <a class="card" data-accent="teal" href="/features/calendar-auto.html">
+    <div class="card-icon">📅</div>
+    <div class="card-label">Calendar Auto-Add</div>
+    <div class="card-title">Forward, see it in gcal</div>
+    <div class="card-desc">Invites, RSVPs, events — routed to the calendar with the right guests and reminders.</div>
+    <div class="card-cta">Read →</div>
+  </a>
 
-    <a class="card" data-accent="blue" href="/features/awardwallet.html">
-      <div class="card-icon">✈️</div>
-      <div class="card-label">AwardWallet Sync</div>
-      <div class="card-title">All points, all programs, one view</div>
-      <div class="card-desc">Daily pull of every loyalty balance across every family member. Filters by owner. Powers the travel toolkit's transfer-path math.</div>
-      <div class="card-cta">Read →</div>
-    </a>
+  <a class="card" data-accent="lav" href="/features/kid-daily.html">
+    <div class="card-icon">🎒</div>
+    <div class="card-label">Kid Daily</div>
+    <div class="card-title">School reports, summarized</div>
+    <div class="card-desc">End-of-day classroom reports become a 60-second family summary.</div>
+    <div class="card-cta">Read →</div>
+  </a>
 
-    <a class="card" data-accent="teal" href="/features/travel-toolkit.html">
-      <div class="card-icon">🧭</div>
-      <div class="card-label">Travel Toolkit</div>
-      <div class="card-title">Award flights, without the spreadsheet</div>
-      <div class="card-desc">Seats.aero + Duffel + premium-hotel programs + transfer-partner graph. One query: "business class, these dates" — you get the options with CPP math done.</div>
-      <div class="card-cta">Read →</div>
-    </a>
+  <a class="card" data-accent="pink" href="/features/household-routines.html">
+    <div class="card-icon">🧹</div>
+    <div class="card-label">Household Routines</div>
+    <div class="card-title">Chores, pets, subscriptions</div>
+    <div class="card-desc">The invisible-but-essential stuff — cleaner days, pet meds, renewals — kept honest.</div>
+    <div class="card-cta">Read →</div>
+  </a>
 
-    <a class="card" data-accent="red" href="/features/security.html">
-      <div class="card-icon">🛡️</div>
-      <div class="card-label">Security Hardening</div>
-      <div class="card-title">Prompt-injection defenses</div>
-      <div class="card-desc">Exfil allowlists, canary tripwires, kill switch, monthly red-team, Bash sandbox. Because a personal agent with your data needs guardrails.</div>
-      <div class="card-cta">Read →</div>
-    </a>
+</div>
 
-  </div>
+<div class="cat-head">Health + Fitness</div>
+<div class="grid">
+
+  <a class="card" data-accent="orange" href="/features/theory.html">
+    <div class="card-icon">💪</div>
+    <div class="card-label">Theory</div>
+    <div class="card-title">OTF seat, already booked</div>
+    <div class="card-desc">Grabs your preferred class the second the 28-day window opens. Waitlist-aware.</div>
+    <div class="card-cta">Read →</div>
+  </a>
+
+  <a class="card" data-accent="red" href="/features/hevy.html">
+    <div class="card-icon">🏋️</div>
+    <div class="card-label">Hevy Review</div>
+    <div class="card-title">Getting better, verified</div>
+    <div class="card-desc">Week-over-week deltas against the same slot last cycle. Flags regressions without crying wolf.</div>
+    <div class="card-cta">Read →</div>
+  </a>
+
+  <a class="card" data-accent="pink" href="/features/wellness.html">
+    <div class="card-icon">🩺</div>
+    <div class="card-label">Wellness Concierge</div>
+    <div class="card-title">Appointments, pipelined</div>
+    <div class="card-desc">Pre-op prep, day-of reminders, post-op care, recurring cleaning cadences. Slips-through-cracks zero.</div>
+    <div class="card-cta">Read →</div>
+  </a>
+
+</div>
+
+<div class="cat-head">Money</div>
+<div class="grid">
+
+  <a class="card" data-accent="gold" href="/features/wealth-dashboard.html">
+    <div class="card-icon">📊</div>
+    <div class="card-label">Wealth Dashboard</div>
+    <div class="card-title">The book, always current</div>
+    <div class="card-desc">Positions marked to live prices. Target path plotted. Realized YTD + tax burn, separately.</div>
+    <div class="card-cta">Read →</div>
+  </a>
+
+  <a class="card" data-accent="gold" href="/features/warren.html">
+    <div class="card-icon">🏛️</div>
+    <div class="card-label">Warren</div>
+    <div class="card-title">Pre-trade committee review</div>
+    <div class="card-desc">Seven specialists debate every speculative trade. Bull case vs. skeptic, sized position.</div>
+    <div class="card-cta">Read →</div>
+  </a>
+
+  <a class="card" data-accent="gold" href="/features/market-monitor.html">
+    <div class="card-icon">📡</div>
+    <div class="card-label">Market Monitor</div>
+    <div class="card-title">Thesis conditions, watched</div>
+    <div class="card-desc">Spot-based stops, not premium. Real-time alerts. Insider buys + unusual flow surfaced.</div>
+    <div class="card-cta">Read →</div>
+  </a>
+
+  <a class="card" data-accent="gold" href="/features/cc-benefits.html">
+    <div class="card-icon">💳</div>
+    <div class="card-label">CC Benefits Tracker</div>
+    <div class="card-title">Use-it-or-lose-it, surfaced</div>
+    <div class="card-desc">Tiered nudges for airline, hotel, dining credits. Annual fees pay themselves.</div>
+    <div class="card-cta">Read →</div>
+  </a>
+
+</div>
+
+<div class="cat-head">Travel</div>
+<div class="grid">
+
+  <a class="card" data-accent="blue" href="/features/awardwallet.html">
+    <div class="card-icon">✈️</div>
+    <div class="card-label">AwardWallet Sync</div>
+    <div class="card-title">Every point, one view</div>
+    <div class="card-desc">Daily pull across every program, every family member. Powers the transfer-path math.</div>
+    <div class="card-cta">Read →</div>
+  </a>
+
+  <a class="card" data-accent="teal" href="/features/travel-toolkit.html">
+    <div class="card-icon">🧭</div>
+    <div class="card-label">Travel Toolkit</div>
+    <div class="card-title">Award flights, without the spreadsheet</div>
+    <div class="card-desc">Seats.aero + transfer graph + CPP math + hotel-program triggers. One question, ranked options.</div>
+    <div class="card-cta">Read →</div>
+  </a>
+
+  <a class="card" data-accent="teal" href="/features/trip-pings.html">
+    <div class="card-icon">🗓️</div>
+    <div class="card-label">Trip Pings</div>
+    <div class="card-title">The hundred small things</div>
+    <div class="card-desc">Reservations open, packing lists, flight changes, concierge drafts — on the exact day.</div>
+    <div class="card-cta">Read →</div>
+  </a>
+
+</div>
+
+<div class="cat-head">Safety</div>
+<div class="grid">
+
+  <a class="card" data-accent="red" href="/features/security.html">
+    <div class="card-icon">🛡️</div>
+    <div class="card-label">Security Hardening</div>
+    <div class="card-title">Prompt-injection defenses</div>
+    <div class="card-desc">Exfil allowlist, canary tripwires, kill switch, monthly red-team, Bash sandbox.</div>
+    <div class="card-cta">Read →</div>
+  </a>
+
+</div>
+
+</section>
+
+<section class="section waitlist" id="waitlist">
+  <h3>Join the waitlist</h3>
+  <h2>Travis is rolling out in batches.</h2>
+  <p>Leave an email. You'll hear when it's your turn. No newsletter, no updates, no noise — one message, when it's ready.</p>
+  <form id="waitlist-form" novalidate>
+    <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+    <button type="submit">Request invite</button>
+  </form>
+  <div class="waitlist-status" id="waitlist-status"></div>
 </section>
 
 <section class="section" id="philosophy">
   <h2>Philosophy</h2>
   <div class="manifesto">
     <h3>Quiet by default</h3>
-    <p>
-      Most assistants try to impress you with activity. Travis is the opposite.
-      It runs in the background, does the work, and only interrupts you when
-      a decision you haven't delegated actually requires your attention.
-    </p>
-    <p>
-      The bar for sending you a Telegram is high. The bar for making a
-      purchase is a real tap. The bar for reaching outside your household
-      is higher still. Defaults tilt toward "do the right thing silently,"
-      but every irreversible action goes through explicit approval.
-    </p>
+    <p>Most assistants try to impress you with activity. Travis is the opposite. It runs in the background, does the work, and only interrupts you when a decision you haven't delegated actually requires your attention.</p>
+    <p>The bar for sending you a Telegram is high. The bar for making a purchase is a real tap. The bar for reaching outside your household is higher still. Defaults tilt toward "do the right thing silently," but every irreversible action goes through explicit approval.</p>
   </div>
   <div class="manifesto">
     <h3>Runs on your Mac</h3>
-    <p>
-      No cloud account, no Travis-the-SaaS, no data-sharing tier. A Mac you
-      already own, a repo you already control, secrets in your own
-      Keychain. Agents talk to sites and APIs through your own sessions
-      — they're doing what you would do, just faster and more patiently.
-    </p>
-    <p>
-      Architecturally boring by design. launchd for scheduling, Playwright
-      for sites that don't have APIs, Telegram for inputs, Claude for
-      judgment calls.
-    </p>
+    <p>No cloud account, no Travis-the-SaaS, no data-sharing tier. A Mac you already own, a repo you already control, secrets in your own Keychain. Agents talk to sites and APIs through your own sessions — they're doing what you would do, just faster and more patiently.</p>
+    <p>Architecturally boring by design. launchd for scheduling, Playwright for sites that don't have APIs, Telegram for inputs, Claude for judgment calls.</p>
   </div>
   <div class="manifesto">
     <h3>One tap is the UI</h3>
-    <p>
-      Travis is not an app. There's no dashboard you log into. There are no
-      notifications you sort through. The interface is a Telegram chat —
-      one thread, three kinds of messages: a briefing, a decision prompt,
-      a confirmation. Approve or decline, and it keeps going.
-    </p>
+    <p>Travis is not an app. There's no dashboard you log into. There are no notifications you sort through. The interface is a Telegram chat — one thread, three kinds of messages: a briefing, a decision prompt, a confirmation. Approve or decline, and it keeps going.</p>
   </div>
 </section>
 
@@ -182,5 +391,44 @@
 </div>
 
 </div>
+
+<script>
+(function() {
+  var form = document.getElementById("waitlist-form");
+  var status = document.getElementById("waitlist-status");
+  if (!form) return;
+  form.addEventListener("submit", async function(ev) {
+    ev.preventDefault();
+    var email = (form.elements.email.value || "").trim();
+    if (!email) return;
+    var btn = form.querySelector("button");
+    btn.disabled = true;
+    status.className = "waitlist-status";
+    status.textContent = "Sending…";
+    try {
+      var r = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email })
+      });
+      var data = await r.json().catch(function(){ return {}; });
+      if (r.ok && data.ok) {
+        status.className = "waitlist-status success";
+        status.textContent = "You're on the list. Travis will reach out.";
+        form.elements.email.value = "";
+      } else {
+        status.className = "waitlist-status error";
+        status.textContent = "Something went wrong. Try again?";
+      }
+    } catch (e) {
+      status.className = "waitlist-status error";
+      status.textContent = "Network error. Try again?";
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
