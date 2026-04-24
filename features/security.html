@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><title>Security Hardening — Travis</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="/style.css">
+</head><body class="a-red">
+<div class="fw">
+
+<a class="back-link" href="/">← All features</a>
+<div class="eyebrow">Feature</div>
+<h1>Travis <span class="hl">Security Hardening</span></h1>
+<p class="lede">
+  An agent that reads your email, touches your calendar, knows your
+  financial data, and can make purchases needs <b>actual guardrails</b>.
+  Not "trust me." Real, structural defenses against prompt injection,
+  data exfiltration, and identity spoofing. Layered on by default.
+</p>
+
+<div class="flow">
+
+  <div class="step">
+    <div class="icon">🧾</div>
+    <div>
+      <div class="label">Behavioral rules</div>
+      <div class="title">Exfiltration allowlist</div>
+      <div class="sub">Hard-coded in Travis's prompt: <em>never</em> transmit .env, Keychain items, sensitive data JSONs, memory directory, personal credentials. Permitted destinations are your own accounts only.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="icon">🪤</div>
+    <div>
+      <div class="label">Canary tripwires</div>
+      <div class="title">Planted in sensitive data</div>
+      <div class="sub">Random <code>CANARY-…</code> strings seeded in financial + loyalty data files. If a canary ever appears in an outbound message, a prompt injection has succeeded — and the monthly red-team catches it.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="icon">🛑</div>
+    <div>
+      <div class="label">Bash sandbox</div>
+      <div class="title">Structural exfil blocks</div>
+      <div class="sub">The Claude Code settings file carries a deny list blocking exfil-shaped shell invocations: cat-to-curl of secrets, Keychain-to-mail, memory-dir-to-net, canary-in-POST. <em>Even if the behavioral layer slips, the tool layer refuses.</em></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="icon">🚨</div>
+    <div>
+      <div class="label">Kill switch + red-team</div>
+      <div class="title">Known recovery, proven resilience</div>
+      <div class="sub"><code>/halt</code> from your DM boots every Travis job and kills in-flight browsers. Monthly red-team auto-sends canonical injection emails, then scans outbound logs. <em>Pass or fail, you hear the result.</em></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="tap">
+  <div class="tap-head">Your part</div>
+  <div class="tap-body">Trust, but verify. Travis runs the verify loop itself.</div>
+</div>
+
+<div class="page-footer">Installed by the standard setup; optional to disable.</div>
+
+</div></body></html>
