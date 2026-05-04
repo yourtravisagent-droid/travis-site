@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a1d23">
+<title>🎸 Strum</title>
+<style>
+  :root {
+    --bg: #1a1d23;
+    --panel: #232830;
+    --accent: #f4b942;
+    --down: #4fc3f7;
+    --up:   #ba68c8;
+    --text: #f0f0f0;
+    --muted: #8a8f97;
+    --beat-active: #ffeb3b;
+    --chord-bg: #2c333d;
+    --chord-active: #f4b942;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+    overscroll-behavior: none; user-select: none; -webkit-user-select: none; }
+  body { padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom) 16px; max-width: 720px; margin: 0 auto; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; gap: 14px; }
+  header { padding: 12px 0 4px; }
+  h1 { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+  h1 .emoji { margin-right: 6px; }
+  .song-title { color: var(--muted); font-size: 14px; margin-top: 2px; }
+
+  .controls { background: var(--panel); border-radius: 14px; padding: 14px 14px 12px; display: flex; flex-direction: column; gap: 12px; }
+  .controls-row { display: flex; gap: 10px; align-items: center; }
+  .play-btn { background: var(--accent); color: #111; border: none; border-radius: 999px; width: 56px; height: 56px; font-size: 24px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 80ms; }
+  .play-btn:active { transform: scale(0.95); }
+  .bpm { display: flex; flex-direction: column; flex: 1; gap: 4px; }
+  .bpm-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  .bpm-row .bpm-val { color: var(--accent); font-weight: 700; }
+  .slider { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: #3a4049; border-radius: 999px; outline: none; }
+  .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 999px; background: var(--accent); cursor: pointer; }
+  .slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 999px; background: var(--accent); cursor: pointer; border: none; }
+  .toggles { display: flex; gap: 8px; flex-wrap: wrap; }
+  .toggle { background: #3a4049; color: var(--text); border: none; border-radius: 999px; padding: 7px 14px; font-size: 13px; cursor: pointer; }
+  .toggle.on { background: var(--accent); color: #111; font-weight: 600; }
+
+  .chord-strip { background: var(--panel); border-radius: 14px; padding: 16px 14px; }
+  .chord-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
+  .chord-now { font-size: 64px; font-weight: 800; line-height: 1; color: var(--accent); letter-spacing: -0.02em; min-height: 64px; }
+  .chord-next { font-size: 18px; color: var(--muted); margin-top: 4px; }
+
+  .pattern { background: var(--panel); border-radius: 14px; padding: 16px 14px; }
+  .pattern-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 10px; }
+  .beats { display: flex; gap: 8px; justify-content: space-between; }
+  .beat { flex: 1; aspect-ratio: 1 / 1.4; background: var(--chord-bg); border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 8px 4px; transition: background 80ms, transform 80ms; }
+  .beat.active { background: var(--beat-active); color: #111; transform: scale(1.05); }
+  .beat .num { font-size: 13px; font-weight: 700; color: var(--muted); }
+  .beat.active .num { color: #111; }
+  .beat .arrow { font-size: 28px; line-height: 1; }
+  .beat.down .arrow { color: var(--down); }
+  .beat.up   .arrow { color: var(--up); }
+  .beat.rest .arrow { color: #555; }
+  .beat.active.down .arrow, .beat.active.up .arrow, .beat.active.rest .arrow { color: #111; }
+
+  .progression { background: var(--panel); border-radius: 14px; padding: 14px; max-height: 38vh; overflow-y: auto; }
+  .prog-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 10px; }
+  .line { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 0; border-bottom: 1px solid #2c333d; }
+  .line:last-child { border-bottom: none; }
+  .line .lyric { color: var(--muted); font-size: 13px; flex-basis: 100%; }
+  .chord-pill { background: var(--chord-bg); padding: 4px 10px; border-radius: 6px; font-weight: 600; font-size: 14px; }
+  .chord-pill.active { background: var(--chord-active); color: #111; }
+
+  .footer { color: var(--muted); font-size: 11px; text-align: center; padding: 10px 0 14px; }
+  .footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span class="emoji">🎸</span>Strum</h1>
+  <div class="song-title" id="songTitle"></div>
+</header>
+
+<div class="controls">
+  <div class="controls-row">
+    <button class="play-btn" id="playBtn" aria-label="Play/Pause">▶</button>
+    <div class="bpm">
+      <div class="bpm-row">
+        <span>Tempo</span>
+        <span><span class="bpm-val" id="bpmVal">80</span> BPM</span>
+      </div>
+      <input type="range" min="40" max="160" value="80" step="2" class="slider" id="bpmSlider">
+    </div>
+  </div>
+  <div class="toggles">
+    <button class="toggle on" id="clickBtn">🔊 Metronome</button>
+    <button class="toggle" id="loopBtn">🔁 Loop</button>
+    <button class="toggle" id="countInBtn">⏱ Count-in 4</button>
+    <select id="songSelect" class="toggle" style="font-family: inherit;"></select>
+  </div>
+</div>
+
+<div class="chord-strip">
+  <div class="chord-label">Now playing</div>
+  <div class="chord-now" id="chordNow">—</div>
+  <div class="chord-next" id="chordNext">Next: —</div>
+</div>
+
+<div class="pattern">
+  <div class="pattern-label">Strum pattern (D = aşağı, U = yukarı)</div>
+  <div class="beats" id="beats"></div>
+</div>
+
+<div class="progression">
+  <div class="prog-label">Progression</div>
+  <div id="progression"></div>
+</div>
+
+<div class="footer">
+  Tap ▶ to start. Tempo / loop / count-in toggles above.
+</div>
+
+<script>
+// ── Song library ────────────────────────────────────────────────────────
+// Each song: name, default BPM, time signature (always 4 here),
+// strumPattern (8 slots, indices 1-8 with D / U / -),
+// progression: array of {chord, beats, lyric?}.
+// `beats` is the count of QUARTER notes (so 4 = one full bar of 4/4).
+const SONGS = {
+  knockin: {
+    name: "Knockin' on Heaven's Door — Bob Dylan",
+    bpm: 70,
+    strum: ["D","-","D","U","-","U","D","U"],   // D - D U - U D U  (classic 8th-note slow)
+    progression: [
+      {chord: "G",  beats: 4, lyric: "Mama, take this badge off of me"},
+      {chord: "D",  beats: 2},
+      {chord: "Am", beats: 2},
+      {chord: "G",  beats: 4, lyric: "I can't use it anymore"},
+      {chord: "D",  beats: 2},
+      {chord: "Am", beats: 2},
+      {chord: "G",  beats: 4, lyric: "It's getting dark, too dark to see"},
+      {chord: "D",  beats: 2},
+      {chord: "C",  beats: 2},
+      {chord: "G",  beats: 4, lyric: "Feel I'm knockin' on heaven's door"},
+      {chord: "D",  beats: 2},
+      {chord: "C",  beats: 2},
+      {chord: "G",  beats: 4, lyric: "(chorus)  Knock, knock, knockin'"},
+      {chord: "D",  beats: 2},
+      {chord: "C",  beats: 2},
+      {chord: "G",  beats: 4, lyric: "Knock, knock, knockin' on heaven's door"},
+      {chord: "D",  beats: 2},
+      {chord: "C",  beats: 2},
+    ],
+  },
+  wonderwall: {
+    name: "Wonderwall — Oasis (capo 2)",
+    bpm: 87,
+    strum: ["D","D","U","U","D","U","-","-"],   // D D U U D U - -
+    progression: [
+      {chord: "Em7", beats: 4, lyric: "Today is gonna be the day"},
+      {chord: "G",   beats: 4, lyric: "That they're gonna throw it back to you"},
+      {chord: "Dsus4", beats: 4, lyric: "By now you should've somehow"},
+      {chord: "A7sus4", beats: 4, lyric: "Realized what you gotta do"},
+      {chord: "Em7", beats: 4, lyric: "I don't believe that anybody"},
+      {chord: "G",   beats: 4, lyric: "Feels the way I do about you now"},
+    ],
+  },
+  standby: {
+    name: "Stand By Me — Ben E. King",
+    bpm: 110,
+    strum: ["D","-","D","-","D","U","-","U"],
+    progression: [
+      {chord: "A",   beats: 8, lyric: "When the night has come"},
+      {chord: "F#m", beats: 8, lyric: "And the land is dark"},
+      {chord: "D",   beats: 4, lyric: "And the moon is the only light"},
+      {chord: "E",   beats: 4, lyric: "we'll see"},
+      {chord: "A",   beats: 8, lyric: "No I won't be afraid, oh I won't be afraid"},
+      {chord: "F#m", beats: 8},
+      {chord: "D",   beats: 4, lyric: "Just as long as you stand"},
+      {chord: "E",   beats: 4, lyric: "stand by me"},
+    ],
+  },
+};
+
+// ── State ──────────────────────────────────────────────────────────────
+const state = {
+  songKey: "knockin",
+  song: SONGS["knockin"],
+  bpm: 70,
+  playing: false,
+  countIn: false,
+  click: true,
+  loop: true,
+  beatIndex: 0,        // global 8th-note index (2 per quarter)
+  countDown: 0,        // remaining 8th notes of count-in
+};
+
+let audioCtx = null;
+let nextNoteTime = 0;
+let scheduler = null;
+const SCHEDULE_AHEAD = 0.1; // seconds
+const LOOKAHEAD = 25;       // ms
+
+// ── Helpers ────────────────────────────────────────────────────────────
+function totalEighths(song) {
+  // Each progression beat == quarter note == 2 eighths
+  return song.progression.reduce((a, b) => a + b.beats, 0) * 2;
+}
+function chordAtEighth(song, i) {
+  let acc = 0;
+  for (const seg of song.progression) {
+    const eighths = seg.beats * 2;
+    if (i < acc + eighths) return seg;
+    acc += eighths;
+  }
+  return song.progression[song.progression.length - 1];
+}
+function nextChordAfter(song, i) {
+  let acc = 0;
+  for (let k = 0; k < song.progression.length; k++) {
+    const eighths = song.progression[k].beats * 2;
+    if (i < acc + eighths) return song.progression[(k + 1) % song.progression.length];
+    acc += eighths;
+  }
+  return null;
+}
+
+// ── Audio ──────────────────────────────────────────────────────────────
+function ensureAudio() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === "suspended") audioCtx.resume();
+}
+function tickClick(time, accent = false) {
+  if (!state.click) return;
+  const o = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  o.frequency.value = accent ? 1400 : 900;
+  g.gain.setValueAtTime(0.0001, time);
+  g.gain.exponentialRampToValueAtTime(accent ? 0.5 : 0.25, time + 0.001);
+  g.gain.exponentialRampToValueAtTime(0.0001, time + 0.07);
+  o.connect(g).connect(audioCtx.destination);
+  o.start(time); o.stop(time + 0.08);
+}
+
+// ── Render ─────────────────────────────────────────────────────────────
+function renderBeats() {
+  const el = document.getElementById("beats");
+  el.innerHTML = "";
+  state.song.strum.forEach((s, i) => {
+    const div = document.createElement("div");
+    div.className = "beat " + (s === "D" ? "down" : s === "U" ? "up" : "rest");
+    div.innerHTML = `<div class="num">${Math.floor(i/2)+1}${i%2 ? "&" : ""}</div>` +
+                    `<div class="arrow">${s === "D" ? "↓" : s === "U" ? "↑" : "·"}</div>`;
+    el.appendChild(div);
+  });
+}
+function renderProgression() {
+  const el = document.getElementById("progression");
+  el.innerHTML = "";
+  state.song.progression.forEach((seg, idx) => {
+    const div = document.createElement("div");
+    div.className = "line";
+    div.dataset.idx = idx;
+    if (seg.lyric) {
+      const l = document.createElement("div");
+      l.className = "lyric"; l.textContent = seg.lyric;
+      div.appendChild(l);
+    }
+    const c = document.createElement("span");
+    c.className = "chord-pill"; c.textContent = `${seg.chord} (${seg.beats})`;
+    div.appendChild(c);
+    el.appendChild(div);
+  });
+}
+function highlightCurrent() {
+  const i = state.beatIndex;
+  // highlight beat slot (within 8-slot pattern bar)
+  const slotIdx = i % state.song.strum.length;
+  document.querySelectorAll(".beat").forEach((b, k) => b.classList.toggle("active", k === slotIdx));
+  // highlight chord
+  const seg = chordAtEighth(state.song, i);
+  document.getElementById("chordNow").textContent = seg.chord;
+  const next = nextChordAfter(state.song, i);
+  document.getElementById("chordNext").textContent = next ? `Next: ${next.chord}` : "End";
+  // highlight progression line — find which seg index this is
+  let acc = 0, segIdx = 0;
+  for (let k = 0; k < state.song.progression.length; k++) {
+    const eighths = state.song.progression[k].beats * 2;
+    if (i < acc + eighths) { segIdx = k; break; }
+    acc += eighths;
+  }
+  document.querySelectorAll(".line").forEach((line, k) => {
+    line.classList.toggle("active", k === segIdx);
+    const pill = line.querySelector(".chord-pill");
+    if (pill) pill.classList.toggle("active", k === segIdx);
+  });
+  // scroll into view if needed
+  const activeLine = document.querySelector(".line.active");
+  if (activeLine) activeLine.scrollIntoView({block: "nearest", behavior: "smooth"});
+}
+
+// ── Loop / scheduler ──────────────────────────────────────────────────
+function eighthDuration() { return (60 / state.bpm) / 2; } // sec per 8th
+function nextEighth() {
+  const dt = eighthDuration();
+  // Tick for this 8th (accent on beat 1 of bar)
+  if (state.countDown > 0) {
+    tickClick(nextNoteTime, true);
+    state.countDown--;
+  } else {
+    const slot = state.beatIndex % state.song.strum.length;
+    tickClick(nextNoteTime, slot === 0);
+    setTimeout(highlightCurrent, Math.max(0, (nextNoteTime - audioCtx.currentTime) * 1000));
+    state.beatIndex++;
+    if (state.beatIndex >= totalEighths(state.song)) {
+      if (state.loop) state.beatIndex = 0;
+      else { stop(); return; }
+    }
+  }
+  nextNoteTime += dt;
+}
+function tick() {
+  while (nextNoteTime < audioCtx.currentTime + SCHEDULE_AHEAD) nextEighth();
+}
+function play() {
+  ensureAudio();
+  state.playing = true;
+  document.getElementById("playBtn").textContent = "⏸";
+  state.countDown = state.countIn ? 8 : 0; // 8 eighths = 4 quarter beats count-in
+  nextNoteTime = audioCtx.currentTime + 0.08;
+  scheduler = setInterval(tick, LOOKAHEAD);
+}
+function stop() {
+  state.playing = false;
+  document.getElementById("playBtn").textContent = "▶";
+  if (scheduler) { clearInterval(scheduler); scheduler = null; }
+}
+function reset() {
+  stop();
+  state.beatIndex = 0;
+  highlightCurrent();
+}
+
+// ── Boot ───────────────────────────────────────────────────────────────
+function loadSong(key) {
+  state.songKey = key;
+  state.song = SONGS[key];
+  state.bpm = state.song.bpm;
+  document.getElementById("bpmSlider").value = state.bpm;
+  document.getElementById("bpmVal").textContent = state.bpm;
+  document.getElementById("songTitle").textContent = state.song.name;
+  reset();
+  renderBeats();
+  renderProgression();
+  highlightCurrent();
+}
+function init() {
+  // Build song selector
+  const sel = document.getElementById("songSelect");
+  for (const [k, s] of Object.entries(SONGS)) {
+    const o = document.createElement("option");
+    o.value = k; o.textContent = s.name;
+    sel.appendChild(o);
+  }
+  sel.addEventListener("change", e => loadSong(e.target.value));
+  document.getElementById("playBtn").addEventListener("click", () => state.playing ? stop() : play());
+  document.getElementById("bpmSlider").addEventListener("input", e => {
+    state.bpm = parseInt(e.target.value, 10);
+    document.getElementById("bpmVal").textContent = state.bpm;
+  });
+  document.getElementById("clickBtn").addEventListener("click", e => { state.click = !state.click; e.target.classList.toggle("on", state.click); });
+  document.getElementById("loopBtn").addEventListener("click", e => { state.loop = !state.loop; e.target.classList.toggle("on", state.loop); });
+  document.getElementById("countInBtn").addEventListener("click", e => { state.countIn = !state.countIn; e.target.classList.toggle("on", state.countIn); });
+  loadSong("knockin");
+}
+init();
+</script>
+</body>
+</html>
